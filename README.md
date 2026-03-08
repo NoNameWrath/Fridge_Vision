@@ -4,7 +4,7 @@ Fridge Vision is a FastAPI backend that detects food ingredients from fridge ima
 
 ## What it does
 
-- Detects ingredients using a YOLO model (`.pt` weights)
+- Detects ingredients using a YOLOv11-L model (`.pt` weights)
 - Estimates simple ingredient quantities from bounding boxes
 - Optionally runs OCR on labels/text in the image
 - Recommends recipes via:
@@ -15,7 +15,14 @@ Fridge Vision is a FastAPI backend that detects food ingredients from fridge ima
 
 The backend currently defaults to:
 
-- `models/weights4_fridge_vision_yolov8l.pt`
+- `models/weight5_multi_yolov11L.pt`
+
+Current inference defaults:
+
+- `imgsz=800`
+- `conf=0.25`
+- `iou=0.5`
+- classes loaded from `data/classes.txt` (67 classes)
 
 You can override this with `MODEL_PATH` in environment variables.
 
@@ -52,7 +59,7 @@ pip install -r requirements.txt
 
 Place your model at:
 
-- `models/weights4_fridge_vision_yolov8l.pt`
+- `models/weight5_multi_yolov11L.pt`
 
 or set custom path:
 
@@ -174,9 +181,9 @@ curl -X POST "http://localhost:8000/recommend-recipes?ingredients=tomato&ingredi
 
 Use environment variables (or a `.env` file) for key settings:
 
-- `MODEL_PATH` (default: `models/weights4_fridge_vision_yolov8l.pt`)
+- `MODEL_PATH` (default: `models/weight5_multi_yolov11L.pt`)
 - `CONF_THRESHOLD` (default: `0.25`)
-- `IOU_THRESHOLD` (default: `0.45`)
+- `IOU_THRESHOLD` (default: `0.5`)
 - `API_HOST` (default: `0.0.0.0`)
 - `API_PORT` (default: `8000`)
 - `ENABLE_OCR` (default: `true`)
